@@ -1,6 +1,7 @@
 // Require Discord.JS
 const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');   
-const { token } = require('./token.json');
+const token = process.env.TOKEN;
+
 
 // More Imports
 const fs = require('node:fs');

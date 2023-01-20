@@ -9,7 +9,7 @@ module.exports = {
         // Announcement Send Button
         if (interaction.customId === 'sendAnnouncement') {
             const announceData = require('../announcement.json');
-            const channel = interaction.client.channels.cache.get("820800981024768010");
+            const channel = interaction.client.channels.cache.get(process.env.ANNOUNCECHANNEL);
             channel.send({ content: template.createAnnoucement(announceData) });
             await interaction.reply({ content: ":white_check_mark: Sent!", ephemeral: true });
         }

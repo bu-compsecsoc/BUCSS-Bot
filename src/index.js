@@ -3,6 +3,7 @@ require('dotenv').config()
 const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 const { commands } = require('./commands');
 const { events } = require('./events');
+const { deployCommands } = require("./deployCommands");
 const token = process.env.TOKEN;
 
 // Create Client
@@ -32,4 +33,4 @@ for (const event of events) {
 }
 
 
-client.login(token);
+deployCommands().then(() => client.login(token));

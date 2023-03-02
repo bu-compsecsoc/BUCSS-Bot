@@ -1,6 +1,6 @@
-const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle} = require('discord.js');
+import { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 
-module.exports = {
+export default{
 	data: new SlashCommandBuilder()
 		.setName('membership')
 		.setDescription('Sends your account for a membership review!')
@@ -11,7 +11,7 @@ module.exports = {
         ),
 	async execute(interaction) {
         // Check if user has the member role
-        usersRoles = interaction.member.roles.member._roles
+        let usersRoles = interaction.member.roles.member._roles
         for (const role of usersRoles) {
             if (process.env.MEMBERID == role) {
                 await interaction.reply({
@@ -34,7 +34,7 @@ module.exports = {
 
         // ID is valid, send for review
         const channel = interaction.client.channels.cache.get(process.env.MEMBERREVIEWCHANNEL);
-        userID = interaction.member.user;
+        let userID = interaction.member.user;
 
         const row = new ActionRowBuilder()
             .addComponents(

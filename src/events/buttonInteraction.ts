@@ -1,15 +1,15 @@
-const { Events, italic, bold, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const template = require('../utils/announceTemplate.js');
-const fs = require('node:fs');
+import { Events, italic, bold, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import template from '../utils/announceTemplate';
+import fs from 'node:fs';
 
-module.exports = {
+export default{
 	name: Events.InteractionCreate,
 	async execute(interaction) {
 		if (!interaction.isButton()) return;
 
         // Announcement Send Button
         if (interaction.customId === 'sendAnnouncement') {
-            const announceData = JSON.parse(fs.readFileSync('./announcement.json'));
+            const announceData = JSON.parse(fs.readFileSync('./announcement.json').toString());
             const channel = interaction.client.channels.cache.get(process.env.ANNOUNCECHANNEL);
             channel.send({ content: template.createAnnoucement(announceData) });
             await interaction.reply({ content: ":white_check_mark: Sent!", ephemeral: true });
@@ -18,7 +18,7 @@ module.exports = {
         // Preview Announcement Button
         if (interaction.customId === 'previewAnnouncement') {
 
-            var announceData = JSON.parse(fs.readFileSync('./announcement.json'));
+            var announceData = JSON.parse(fs.readFileSync('./announcement.json').toString());
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()

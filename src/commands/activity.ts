@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 
-module.exports = {
+export default{
 	data: new SlashCommandBuilder()
 		.setName('activity')
 		.setDescription('Sets the bot activity')

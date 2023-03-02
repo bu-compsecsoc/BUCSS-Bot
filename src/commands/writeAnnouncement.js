@@ -1,10 +1,10 @@
-const { SlashCommandBuilder, PermissionFlagsBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, ButtonBuilder, ButtonStyle, italic, bold } = require('discord.js');
-const fs = require('node:fs');
-const template = require('../utils/announceTemplate.js');
+import { SlashCommandBuilder, PermissionFlagsBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, ButtonBuilder, ButtonStyle, italic, bold } from 'discord.js';
+import fs from 'node:fs';
+import template from '../utils/announceTemplate.js';
 
 const wait = require('node:timers/promises').setTimeout;
 
-module.exports = {
+export default{
 	data: new SlashCommandBuilder()
 		.setName('announce')
 		.setDescription('Opens a Menu to write an announcement')
@@ -41,7 +41,7 @@ module.exports = {
         if (submitted) {
             var announceData = {"message": submitted.fields.getTextInputValue("announcementInput")};
 
-            fs.writeFileSync('announcement.json', JSON.stringify(announceData), function (err) {
+            fs.writeFile('announcement.json', JSON.stringify(announceData), function (err) {
                 if (err) {
                     submitted.reply({
                         content: `:warn: An Error Occured, check logs for details!! :warn:`,

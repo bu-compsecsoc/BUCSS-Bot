@@ -1,5 +1,5 @@
 const { Events, italic, bold, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const template = require('../utils/announceTemplate.js');
+const template = require('../../utils/announceTemplate.js');
 const fs = require('node:fs');
 
 module.exports = {

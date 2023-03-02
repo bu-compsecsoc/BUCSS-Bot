@@ -41,7 +41,7 @@ module.exports = {
         if (submitted) {
             var announceData = {"message": submitted.fields.getTextInputValue("announcementInput")};
 
-            fs.writeFile('announcement.json', JSON.stringify(announceData), function (err) {
+            fs.writeFileSync('announcement.json', JSON.stringify(announceData), function (err) {
                 if (err) {
                     submitted.reply({
                         content: `:warn: An Error Occured, check logs for details!! :warn:`,

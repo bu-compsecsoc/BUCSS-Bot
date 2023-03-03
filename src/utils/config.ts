@@ -2,7 +2,7 @@ require("dotenv").config()
 
 export const token = attempt_get_env("TOKEN", "bot token");
 export const client_id = attempt_get_env("CLIENT_ID", "bot client id");
-export const announcement_channel_id = attempt_get_env("ANNOUNCEMENT_CHANNEL", "annoucnment channel id");
+export const announcement_channel_id = attempt_get_env("ANNOUNCEMENT_CHANNEL", "announcement channel id");
 export const member_role_id = attempt_get_env("MEMBER_ROLE_ID", "member role id", { required: false });
 export const member_view_channel = attempt_get_env("MEMBER_VIEW_CHANNEL", "member view channel id", { required: false });
 

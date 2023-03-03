@@ -1,4 +1,5 @@
 import { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import { member_role_id, member_view_channel } from '../config';
 
 export default{
 	data: new SlashCommandBuilder()
@@ -10,10 +11,9 @@ export default{
                 .setRequired(true)
         ),
 	async execute(interaction) {
-        // Check if user has the member role
         let usersRoles = interaction.member.roles.member._roles
         for (const role of usersRoles) {
-            if (process.env.MEMBERID == role) {
+            if (member_role_id == role) {
                 await interaction.reply({
                     content: ':rotating_light: You are already a member!',
                     ephemeral: true
@@ -32,8 +32,7 @@ export default{
             return;
         }
 
-        // ID is valid, send for review
-        const channel = interaction.client.channels.cache.get(process.env.MEMBERREVIEWCHANNEL);
+        const channel = interaction.client.channels.cache.get(member_view_channel);
         let userID = interaction.member.user;
 
         const row = new ActionRowBuilder()

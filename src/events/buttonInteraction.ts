@@ -1,5 +1,6 @@
 import { Events, italic, bold, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import template from '../utils/announceTemplate';
+import { annoucnment_channel_id, member_role_id } from '../config';
 import fs from 'node:fs';
 
 export default{
@@ -10,7 +11,7 @@ export default{
         // Announcement Send Button
         if (interaction.customId === 'sendAnnouncement') {
             const announceData = JSON.parse(fs.readFileSync('./announcement.json').toString());
-            const channel = interaction.client.channels.cache.get(process.env.ANNOUNCECHANNEL);
+            const channel = interaction.client.channels.cache.get(annoucnment_channel_id);
             channel.send({ content: template.createAnnoucement(announceData) });
             await interaction.reply({ content: ":white_check_mark: Sent!", ephemeral: true });
         }
@@ -32,7 +33,7 @@ export default{
 
         // Member Verification Button
         if (interaction.customId.startsWith('memberVerify')) {
-            const role = interaction.guild.roles.cache.get(process.env.MEMBERID)
+            const role = interaction.guild.roles.cache.get(member_role_id)
             const member = role.guild.members.cache.get(interaction.customId.split('|')[1])
             member.roles.add(role);
             member.createDM().then(channel => {

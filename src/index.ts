@@ -3,9 +3,10 @@ import { load_event_handlers } from './events';
 import { refresh_slash_commands } from './commands';
 import { token } from './config';
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 (async () => {
+    const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+    
     await refresh_slash_commands()
     load_event_handlers(client)
     client.login(token)

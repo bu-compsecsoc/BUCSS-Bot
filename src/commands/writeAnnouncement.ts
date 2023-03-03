@@ -25,7 +25,7 @@ export default{
 
 		// An action row only holds one text input,
 		// so you need one action row per text input.
-		const actionRow = new ActionRowBuilder().addComponents(announcementInput);
+		const actionRow: any = new ActionRowBuilder().addComponents(announcementInput);
 
 		// Add inputs to the modal
 		modal.addComponents(actionRow);

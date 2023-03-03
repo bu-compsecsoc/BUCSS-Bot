@@ -40,6 +40,8 @@ This will change the activity of the bot to the activity you specify.
 
 ## Setup
 
+### .env
+
 Change the .env.template to .env and fill in the entires
 
 TOKEN
@@ -50,3 +52,9 @@ CLIENT_ID
 
 ANNOUNCEMENT_CHANNEL
 > The id of the channel that announcements will be sent in
+
+### Deploying
+
+Run the follow commands
+> npm install
+> npm start

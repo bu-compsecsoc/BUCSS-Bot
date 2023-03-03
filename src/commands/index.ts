@@ -1,4 +1,5 @@
 import type { SlashCommandBuilder, BaseInteraction} from 'discord.js';
+import { Collection } from 'discord.js';
 
 type Command = {
     data: Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">,
@@ -18,3 +19,8 @@ export const commands: Command[] = [
     verifyMember,
     writeAnnouncement
 ]
+export const command_map = new Map();
+
+for (let command of commands) {
+    command_map.set(command.data.name, command)
+}

@@ -1,5 +1,4 @@
 import type { SlashCommandBuilder, BaseInteraction} from 'discord.js';
-import { Collection } from 'discord.js';
 
 type Command = {
     data: Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">,
@@ -24,3 +23,5 @@ export const command_map = new Map();
 for (let command of commands) {
     command_map.set(command.data.name, command)
 }
+
+export { refresh_slash_commands } from "./deploy";

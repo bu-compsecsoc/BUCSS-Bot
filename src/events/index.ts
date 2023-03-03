@@ -1,3 +1,4 @@
+import type { Client } from "discord.js";
 type Event = {
     name: string,
     once?: boolean
@@ -13,3 +14,14 @@ export const events: Event[] = [
     handleCommands,
     ready,
 ];
+
+
+export function load_event_handlers(client: Client) {
+    for (const event of events) {
+        if (event.once) {
+            client.once(event.name, (...args) => event.execute(...args));
+        } else {
+            client.on(event.name, (...args) => event.execute(...args));
+        }
+    }
+}

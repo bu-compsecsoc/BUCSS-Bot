@@ -1,18 +1,20 @@
-import type { SlashCommandBuilder, Interaction } from 'discord.js';
+import type { SlashCommandBuilder, BaseInteraction} from 'discord.js';
 
 type Command = {
     data: Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">,
-    execute:  (Interaction) => Promise<void>
+    execute:  (BaseInteraction) => Promise<void>
 }
 
 import activity from "./activity";
-import status from "./updateStatus";
+import status from "./status";
+import updateStatus from "./updateStatus";
 import verifyMember from "./verifyMember";
 import writeAnnouncement from "./writeAnnouncement";
 
 export const commands: Command[] = [
     activity,
     status,
+    updateStatus,
     verifyMember,
     writeAnnouncement
 ]

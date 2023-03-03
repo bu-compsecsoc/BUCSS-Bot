@@ -5,7 +5,7 @@ export default{
 		.setName('update_status')
 		.setDescription('Sets the bots status')
         .addStringOption(option => 
-            option.setName('statusfield')
+            option.setName('status')
                 .setDescription('The status to set')
                 .setRequired(true)
                 .addChoices(
@@ -16,11 +16,11 @@ export default{
                 )
         ),
 	async execute(interaction) {
-        const status = interaction.options.getString('statusfield');
+        const status = interaction.options.getString('status');
         await interaction.client.user.setStatus(status);
         await interaction.reply(
             {
-                content: 'Status set to ' + status + '!',
+                content: `The bot is now ${status}!`,
                 ephemeral: true
             }
         )

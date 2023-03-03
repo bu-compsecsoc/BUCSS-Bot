@@ -30,7 +30,7 @@ export default{
         await interaction.showModal(modal);
 
         const submitted = await interaction.awaitModalSubmit({
-            time: 120*1000, // 60 seconds
+            time: 5 * 60 * 1000, // 5 minutes
             filter: i => i.user.id === interaction.user.id
         }).catch(error => {
             console.error(error);
@@ -40,12 +40,10 @@ export default{
         if (!submitted) return
         let announcement: string = submitted.fields.getTextInputValue("announcementInput");
         
-        Store.set("announcement", announcement);
-
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setCustomId(generateCustomId('previewAnnouncement'))
+                    .setCustomId(generateCustomId('previewAnnouncement', announcement))
                     .setLabel('Preview')
                     .setStyle(ButtonStyle.Primary),
             )

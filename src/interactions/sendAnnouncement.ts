@@ -5,8 +5,7 @@ import { createAnnouncement } from '../utils/templates';
 
 export default {
     name: "sendAnnouncement",
-    async execute(interaction: ButtonInteraction) {
-        const announcement = Store.get("announcement");
+    async execute(interaction: ButtonInteraction, announcement: string) {
         const channel = interaction.client.channels.cache.get(announcement_channel_id);
         if (!(channel instanceof TextChannel)) {
             console.warn("Unable To Retrieve Usable Announcement Channel")

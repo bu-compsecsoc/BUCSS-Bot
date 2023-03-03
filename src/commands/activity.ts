@@ -14,7 +14,7 @@ export default{
         interaction.client.user.setActivity(activity);
         await interaction.reply(
             {
-                content: 'Activity set to ' + activity + '!',
+                content: `Activity set to "${activity}"!`,
                 ephemeral: true
             }
         )

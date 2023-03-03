@@ -36,26 +36,24 @@ export default{
             console.error(error);
             interaction.reply({ content: "An error occured!!", ephemeral: true });
         })
-        if (!submitted) return
 
+        if (!submitted) return
         let announcement: string = submitted.fields.getTextInputValue("announcementInput");
         
-        // TODO: Add Error Handling
         Store.set("announcement", announcement);
 
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
                     .setCustomId('previewAnnouncement')
-                    .setLabel('Send')
+                    .setLabel('Preview')
                     .setStyle(ButtonStyle.Danger),
             )
 
         await submitted.reply({
-            content: createAnnouncement(announcement),
+            content: ":white_check_mark: Saved Announcement!",
             components: [row],
             ephemeral: true
         });
-        
     },
 };

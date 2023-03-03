@@ -33,7 +33,6 @@ export default{
             return;
         }
 
-        const channel = interaction.client.channels.cache.get(member_view_channel);
         let userID = interaction.member.user;
 
         const row = new ActionRowBuilder()
@@ -44,7 +43,18 @@ export default{
                     .setStyle(ButtonStyle.Success),
             )
 
-        channel.send({ content: `================\nCheck ${userID} against ${id}`, components: [row]});
+        const channel = interaction.client.channels.cache.get(member_view_channel);
+        if (!channel) {
+            await interaction.reply({
+                content: ':rotating_light: An Error Occured! Unabled to retrive member verifcation channel!'
+            });
+            throw new TypeError("Unabled to retrive member verifcation channel")
+        }
+
+        channel.send({
+            content: `================\nCheck ${userID} against ${id}`,
+            components: [row]
+        });
 
     
 		await interaction.reply({

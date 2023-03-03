@@ -8,16 +8,16 @@ export default {
     async execute(interaction: ButtonInteraction) {
         const announcement = Store.get("announcement");
         const channel = interaction.client.channels.cache.get(announcement_channel_id);
-        if (channel instanceof TextChannel) {
-            channel.send({ content: createAnnouncement(announcement) });
+        if (!(channel instanceof TextChannel)) {
+            console.warn("Unable To Retrieve Usable Announcement Channel")
             await interaction.reply({
-                content: ":white_check_mark: Sent!",
+                content: ":x: Could Not Retrieve Announcement Channel!",
                 ephemeral: true
             });
         } else {
-            console.warn("Unable to send announcement")
+            channel.send({ content: createAnnouncement(announcement) });
             await interaction.reply({
-                content: ":white_check_mark: Sent!",
+                content: "Success! :white_check_mark:",
                 ephemeral: true
             });
         }

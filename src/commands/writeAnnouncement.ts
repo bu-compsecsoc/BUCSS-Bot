@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, ButtonBuilder, ButtonStyle, italic, bold } from 'discord.js';
-import { createAnnouncement } from '../utils/templates';
+import { generateCustomId } from '../interactions';
 import Store from '../utils/store';
 
 export default{
@@ -45,9 +45,9 @@ export default{
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setCustomId('previewAnnouncement')
+                    .setCustomId(generateCustomId('previewAnnouncement'))
                     .setLabel('Preview')
-                    .setStyle(ButtonStyle.Danger),
+                    .setStyle(ButtonStyle.Primary),
             )
 
         await submitted.reply({

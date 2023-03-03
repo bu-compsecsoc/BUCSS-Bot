@@ -1,6 +1,7 @@
 import { ButtonInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import Store from '../utils/store';
 import { createPreviewAnnouncement } from '../utils/templates';
+import { generateCustomId } from '.';
 
 export default {
     name: "previewAnnouncement",
@@ -9,7 +10,7 @@ export default {
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setCustomId('sendAnnouncement')
+                    .setCustomId(generateCustomId('sendAnnouncement'))
                     .setLabel('Send')
                     .setStyle(ButtonStyle.Success)
             )

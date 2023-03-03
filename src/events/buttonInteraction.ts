@@ -1,18 +1,21 @@
-import { Events, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import { Events } from 'discord.js';
 import type { ButtonInteraction } from 'discord.js';
-import { createAnnouncement, createPreviewAnnouncement } from '../utils/templates';
-import Store from '../utils/store';
 import { interactions } from '../interactions';
-import { announcement_channel_id, member_role_id } from '../utils/config';
 
 export default {
 	name: Events.InteractionCreate,
     async execute(interaction: ButtonInteraction) {
         if (!interaction.isButton()) return;
 
+        let [interaction_name, data] = interaction.customId.split("|");
+        if (data !== undefined) {
+            let b64_decoded_data = Buffer.from(data, "base64").toString();
+            data = JSON.parse(b64_decoded_data);
+        }
+
         for (let interaction_handler of interactions) {
-            if (interaction.customId.startsWith(interaction_handler.name)) {
-                interaction_handler.execute(interaction)
+            if (interaction_name === interaction_handler.name) {
+                interaction_handler.execute(interaction, data)
                 return;
             }
         }

@@ -1,7 +1,7 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import { load_event_handlers } from './events';
 import { refresh_slash_commands } from './commands';
-import { token } from './config';
+import { token } from './utils/config';
 
 
 (async () => {

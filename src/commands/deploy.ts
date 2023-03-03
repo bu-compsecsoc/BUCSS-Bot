@@ -1,6 +1,6 @@
 import { REST, Routes } from 'discord.js';
 import { commands } from '.';
-import { token, client_id } from '../config';
+import { token, client_id } from '../utils/config';
 
 
 export async function refresh_slash_commands() {

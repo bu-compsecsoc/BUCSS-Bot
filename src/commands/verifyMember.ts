@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
-import { member_role_id, member_view_channel } from '../config';
+import { member_role_id, member_view_channel } from '../utils/config';
 
 export default{
 	data: new SlashCommandBuilder()

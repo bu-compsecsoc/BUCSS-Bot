@@ -22,8 +22,8 @@ This will send a message to the channel you are in with the message "Pong!".
 
 `/status {status}`
 
-This will change the status of the bot to the status you specify. 
-Can be: 
+This will change the status of the bot to the status you specify.
+Can be:
 
 - `online`
 - `idle`

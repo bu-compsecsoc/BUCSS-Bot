@@ -3,30 +3,30 @@ import { generateCustomId } from '../interactions';
 import Store from '../utils/store';
 
 export default{
-	data: new SlashCommandBuilder()
-		.setName('announce')
-		.setDescription('Opens a Menu to write an announcement')
+    data: new SlashCommandBuilder()
+        .setName('announce')
+        .setDescription('Opens a Menu to write an announcement')
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
-	async execute(interaction) {
+    async execute(interaction) {
         const modal = new ModalBuilder()
-			.setCustomId('announceText')
-			.setTitle('Make an Announcement');
+            .setCustomId('announceText')
+            .setTitle('Make an Announcement');
 
-		// Add components to modal
+        // Add components to modal
 
-		// Create the text input components
-		const announcementInput = new TextInputBuilder()
-			.setCustomId('announcementInput')
-			.setLabel("What's the announcement?")
-		    // Paragraph means multiple lines of text.
-			.setStyle(TextInputStyle.Paragraph);
+        // Create the text input components
+        const announcementInput = new TextInputBuilder()
+            .setCustomId('announcementInput')
+            .setLabel("What's the announcement?")
+            // Paragraph means multiple lines of text.
+            .setStyle(TextInputStyle.Paragraph);
 
-		// An action row only holds one text input,
-		// so you need one action row per text input.
-		const actionRow: any = new ActionRowBuilder().addComponents(announcementInput);
+        // An action row only holds one text input,
+        // so you need one action row per text input.
+        const actionRow: any = new ActionRowBuilder().addComponents(announcementInput);
 
-		// Add inputs to the modal
-		modal.addComponents(actionRow);
+        // Add inputs to the modal
+        modal.addComponents(actionRow);
         await interaction.showModal(modal);
 
         const submitted = await interaction.awaitModalSubmit({

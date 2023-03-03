@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from 'discord.js';
 
 export default{
-	data: new SlashCommandBuilder()
-		.setName('update_status')
-		.setDescription('Sets the bots status')
+    data: new SlashCommandBuilder()
+        .setName('update_status')
+        .setDescription('Sets the bots status')
         .addStringOption(option => 
             option.setName('status')
                 .setDescription('The status to set')
@@ -15,7 +15,7 @@ export default{
                     {name: "Invisible", value: "invisible"}
                 )
         ),
-	async execute(interaction) {
+    async execute(interaction) {
         const status = interaction.options.getString('status');
         await interaction.client.user.setStatus(status);
         await interaction.reply(
@@ -24,5 +24,5 @@ export default{
                 ephemeral: true
             }
         )
-	},
+    },
 };

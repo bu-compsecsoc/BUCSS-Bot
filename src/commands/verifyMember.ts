@@ -3,15 +3,15 @@ import { member_role_id, member_view_channel } from '../utils/config';
 import { generateCustomId } from '../interactions';
 
 export default{
-	data: new SlashCommandBuilder()
-		.setName('membership')
-		.setDescription('Sends your account for a membership review!')
+    data: new SlashCommandBuilder()
+        .setName('membership')
+        .setDescription('Sends your account for a membership review!')
         .addStringOption(option =>
             option.setName('studentid')
                 .setDescription('Your student ID - (With the "s" prefix)')
                 .setRequired(true)
         ),
-	async execute(interaction) {
+    async execute(interaction) {
         let usersRoles = interaction.member.roles.member._roles
         for (const role of usersRoles) {
             if (member_role_id == role) {
@@ -57,9 +57,9 @@ export default{
         });
 
     
-		await interaction.reply({
+        await interaction.reply({
             content: `:white_check_mark: Your account (${id}) has been sent for a membership review!`,
             ephemeral: true
         });
-	},
+    },
 };

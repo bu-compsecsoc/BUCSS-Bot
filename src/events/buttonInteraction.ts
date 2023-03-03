@@ -3,7 +3,7 @@ import type { ButtonInteraction } from 'discord.js';
 import { interactions } from '../interactions';
 
 export default {
-	name: Events.InteractionCreate,
+    name: Events.InteractionCreate,
     async execute(interaction: ButtonInteraction) {
         if (!interaction.isButton()) return;
 
@@ -19,5 +19,5 @@ export default {
                 return;
             }
         }
-	},
+    },
 };

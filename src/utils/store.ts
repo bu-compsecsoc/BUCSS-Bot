@@ -20,7 +20,6 @@ function get(key: string): any|null {
   } else {
     return null
   }
-  
 }
 
 /**

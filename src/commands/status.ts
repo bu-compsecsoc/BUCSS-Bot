@@ -4,9 +4,9 @@ import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 const startup_time = new Date();
 
 export default{
-	data: new SlashCommandBuilder()
-		.setName('status')
-		.setDescription('View the current status of the bot')
+    data: new SlashCommandBuilder()
+        .setName('status')
+        .setDescription('View the current status of the bot')
     ,
     async execute(interaction) {
         const status = interaction.options.getString('statusfield');
@@ -28,5 +28,5 @@ export default{
                 ephemeral: true
             }
         )
-	},
+    },
 };

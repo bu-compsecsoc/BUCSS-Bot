@@ -1,8 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, ButtonBuilder, ButtonStyle, italic, bold } from 'discord.js';
-import fs from 'node:fs';
-import template from '../utils/announceTemplate.js';
-
-const wait = require('node:timers/promises').setTimeout;
+import { createAnnouncement } from '../utils/templates';
+import Store from '../utils/store';
 
 export default{
 	data: new SlashCommandBuilder()
@@ -38,35 +36,26 @@ export default{
             console.error(error);
             interaction.reply({ content: "An error occured!!", ephemeral: true });
         })
-        if (submitted) {
-            var announceData = {"message": submitted.fields.getTextInputValue("announcementInput")};
+        if (!submitted) return
 
-            fs.writeFile('announcement.json', JSON.stringify(announceData), function (err) {
-                if (err) {
-                    submitted.reply({
-                        content: `:warn: An Error Occured, check logs for details!! :warn:`,
-                        ephemeral: true
-                    });
-                    throw err;
-                }
-                console.log('Saved!');
-            });
+        let announcement: string = submitted.fields.getTextInputValue("announcementInput");
+        
+        // TODO: Add Error Handling
+        Store.set("announcement", announcement);
 
-            const row = new ActionRowBuilder()
+        const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
                     .setCustomId('previewAnnouncement')
-                    .setLabel('Preview')
-                    .setStyle(ButtonStyle.Primary),
+                    .setLabel('Send')
+                    .setStyle(ButtonStyle.Danger),
             )
 
-            await submitted.reply({
-                //content: ":rotating_light:" + italic(bold("THIS IS A PREVIEW MESSAGE")) + ":rotating_light:\n\n" + template.createAnnoucement(require('../announcement.json')),
-                content: ":white_check_mark: Saved!",
-                components: [row],
-                ephemeral: true
-            });
-            
-        }
+        await submitted.reply({
+            content: createAnnouncement(announcement),
+            components: [row],
+            ephemeral: true
+        });
+        
     },
 };

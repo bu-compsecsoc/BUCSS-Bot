@@ -1,11 +1,11 @@
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from 'discord.js';
 
-module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('status')
-		.setDescription('Sets the bots status')
+export default{
+    data: new SlashCommandBuilder()
+        .setName('update_status')
+        .setDescription('Sets the bots status')
         .addStringOption(option => 
-            option.setName('statusfield')
+            option.setName('status')
                 .setDescription('The status to set')
                 .setRequired(true)
                 .addChoices(
@@ -15,14 +15,14 @@ module.exports = {
                     {name: "Invisible", value: "invisible"}
                 )
         ),
-	async execute(interaction) {
-        const status = interaction.options.getString('statusfield');
+    async execute(interaction) {
+        const status = interaction.options.getString('status');
         await interaction.client.user.setStatus(status);
         await interaction.reply(
             {
-                content: 'Status set to ' + status + '!',
+                content: `The bot is now ${status}!`,
                 ephemeral: true
             }
         )
-	},
+    },
 };

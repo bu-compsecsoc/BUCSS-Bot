@@ -1,19 +1,20 @@
-const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle} = require('discord.js');
+import { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import { member_role_id, member_view_channel } from '../utils/config';
+import { generateCustomId } from '../interactions';
 
-module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('membership')
-		.setDescription('Sends your account for a membership review!')
+export default{
+    data: new SlashCommandBuilder()
+        .setName('membership')
+        .setDescription('Sends your account for a membership review!')
         .addStringOption(option =>
             option.setName('studentid')
                 .setDescription('Your student ID - (With the "s" prefix)')
                 .setRequired(true)
         ),
-	async execute(interaction) {
-        // Check if user has the member role
-        usersRoles = interaction.member.roles.member._roles
+    async execute(interaction) {
+        let usersRoles = interaction.member.roles.member._roles
         for (const role of usersRoles) {
-            if (process.env.MEMBERID == role) {
+            if (member_role_id == role) {
                 await interaction.reply({
                     content: ':rotating_light: You are already a member!',
                     ephemeral: true
@@ -32,24 +33,33 @@ module.exports = {
             return;
         }
 
-        // ID is valid, send for review
-        const channel = interaction.client.channels.cache.get(process.env.MEMBERREVIEWCHANNEL);
-        userID = interaction.member.user;
+        let userID = interaction.member.user;
 
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setCustomId(`memberVerify|${userID.id}`)
+                    .setCustomId(generateCustomId("memberVerify", userID.id))
                     .setLabel('Yes, this is a member')
                     .setStyle(ButtonStyle.Success),
             )
 
-        channel.send({ content: `================\nCheck ${userID} against ${id}`, components: [row]});
+        const channel = interaction.client.channels.cache.get(member_view_channel);
+        if (!channel) {
+            await interaction.reply({
+                content: ':rotating_light: An Error Occured! Unabled to retrive member verifcation channel!'
+            });
+            throw new TypeError("Unabled to retrive member verifcation channel")
+        }
+
+        channel.send({
+            content: `================\nCheck ${userID} against ${id}`,
+            components: [row]
+        });
 
     
-		await interaction.reply({
+        await interaction.reply({
             content: `:white_check_mark: Your account (${id}) has been sent for a membership review!`,
             ephemeral: true
         });
-	},
+    },
 };

@@ -41,6 +41,10 @@ export default{
                     .setCustomId(generateCustomId("memberVerify", userID.id))
                     .setLabel('Yes, this is a member')
                     .setStyle(ButtonStyle.Success),
+                new ButtonBuilder()
+                    .setCustomId(generateCustomId("memberReject", userID.id))
+                    .setLabel('No, Reject Request')
+                    .setStyle(ButtonStyle.Danger),
             )
 
         const channel = interaction.client.channels.cache.get(member_view_channel);

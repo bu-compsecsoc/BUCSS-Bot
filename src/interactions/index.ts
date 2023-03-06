@@ -1,6 +1,6 @@
 import type { ButtonInteraction } from 'discord.js';
 export { encodeCustomId, decodeCustomId } from './utils';
-import previewAnnouncement from './previewAnnouncement';
+import confirmAnnouncement from './confirmAnnouncement';
 import memberVerify from './memberVerify';
 import sendAnnouncement from './sendAnnouncement';
 import memberReject from './memberReject';
@@ -12,7 +12,7 @@ type Interaction = {
 
 const interactions: Interaction[] = [
     sendAnnouncement,
-    previewAnnouncement,
+    confirmAnnouncement,
     memberVerify,
     memberReject
 ]

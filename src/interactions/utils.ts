@@ -1,6 +1,6 @@
 type InteractionName =
     "sendAnnouncement" |
-    "previewAnnouncement" |
+    "confirmAnnouncement" |
     "memberVerify" |
     "memberReject";
 

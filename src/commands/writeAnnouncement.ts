@@ -1,5 +1,5 @@
 import { Interaction, SlashCommandBuilder, PermissionFlagsBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, ButtonBuilder, ButtonStyle, CommandInteraction, ModalSubmitInteraction, CacheType, ActionRow } from 'discord.js';
-import { encodeCustomID } from '../interactions';
+import { encodeCustomId } from '../interactions';
 import { createPreviewAnnouncement } from '../utils/templates';
 import Store from '../utils/store';
 
@@ -68,7 +68,7 @@ function createModal() {
 
 function createSubmitButtonRow(announcement_id) {
     const button = new ButtonBuilder()
-        .setCustomId(encodeCustomID('confirmAnnouncement', announcement_id))
+        .setCustomId(encodeCustomId('confirmAnnouncement', announcement_id))
         .setLabel('Send')
         .setStyle(ButtonStyle.Primary)
     

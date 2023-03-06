@@ -17,7 +17,7 @@ export default {
 
         try {
             const user = `${interaction.user.username}#${interaction.user.discriminator}`
-            console.log(`Executing /${interaction_name} from ${user} with data: ${JSON.stringify(data)}`)
+            console.log(`Button ${interaction_name} clicked by ${user} with data: ${JSON.stringify(data)}`)
             await interaction_object.execute(interaction, data);
         } catch (error) {
             console.error(`Error executing ${interaction_name}`);

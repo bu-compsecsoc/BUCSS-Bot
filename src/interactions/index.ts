@@ -17,8 +17,8 @@ const interactions: Interaction[] = [
     memberReject
 ]
 
-
 export const interaction_map = new Map<string, Interaction>();
+
 for (let interaction of interactions) {
     interaction_map.set(interaction.name, interaction)
 }

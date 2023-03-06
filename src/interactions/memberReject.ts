@@ -1,5 +1,4 @@
 import { ButtonInteraction } from 'discord.js';
-import { member_role_id } from '../utils/config';
 
 export default {
     name: "memberReject",

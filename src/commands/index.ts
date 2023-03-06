@@ -18,7 +18,7 @@ export const commands: Command[] = [
     verifyMember,
     writeAnnouncement
 ]
-export const command_map = new Map();
+export const command_map = new Map<string, Command>();
 
 for (let command of commands) {
     command_map.set(command.data.name, command)

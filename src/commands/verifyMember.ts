@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import { member_role_id, member_view_channel } from '../utils/config';
-import { generateCustomId } from '../interactions';
+import { encodeCustomID } from '../interactions';
 
 export default{
     data: new SlashCommandBuilder()
@@ -38,7 +38,7 @@ export default{
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setCustomId(generateCustomId("memberVerify", userID.id))
+                    .setCustomId(encodeCustomID("memberVerify", userID.id))
                     .setLabel('Yes, this is a member')
                     .setStyle(ButtonStyle.Success),
             )

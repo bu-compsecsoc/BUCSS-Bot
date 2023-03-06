@@ -1,8 +1,12 @@
 import { ButtonInteraction } from 'discord.js';
 import { member_role_id } from '../utils/config';
+import { encodeCustomId } from './utils';
 
 export default {
     name: "memberVerify",
+    generateCustomID(userID: string) {
+        return encodeCustomId("memberVerify", userID)
+    },
     async execute(interaction: ButtonInteraction, userID: string) {
         const role = interaction.guild.roles.cache.get(member_role_id)
         const member = role.guild.members.cache.get(userID)

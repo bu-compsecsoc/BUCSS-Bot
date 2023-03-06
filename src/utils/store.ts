@@ -10,10 +10,12 @@ class Kv extends KeyvFile {
 }
 const store = new Kv
 
+type JSONableAny = any;
+
 /**
  * Retrieves a JSON value from disk
  */
-function get(key: string): any|null {
+function get(key: string): JSONableAny|null {
   let value = store.get(key, null)
   if (value != null) {
     return JSON.parse(value)
@@ -22,12 +24,8 @@ function get(key: string): any|null {
   }
 }
 
-/**
- * Stores a JSONable value to disk
- * @param value Must be JSONable
- */
-function set(key: string, value: string) {
-    store.set(key, JSON.stringify(value))
+function set(key: string, value: JSONableAny, ttl?: number) {
+    store.set(key, JSON.stringify(value), ttl)
     store.saveToDisk()
 }
 

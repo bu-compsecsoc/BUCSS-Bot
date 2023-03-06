@@ -1,11 +1,11 @@
 import type { Client } from "discord.js";
 type Event = {
     name: string,
-    once?: boolean
-    execute: (...any) => (void | Promise<void>)
+    once?: boolean,
+    execute: (...args: any[]) => (void | Promise<void>),
 }
 
-import buttonInteraction from "./buttonInteraction";
+import buttonInteraction from "./handleButtons";
 import handleCommands from "./handleCommands";
 import ready from "./ready";
 

@@ -1,5 +1,11 @@
 import { Interaction, SlashCommandBuilder, PermissionFlagsBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, ButtonBuilder, ButtonStyle, CommandInteraction, ModalSubmitInteraction, CacheType, ActionRow } from 'discord.js';
 import { encodeCustomID } from '../interactions';
+import { createPreviewAnnouncement } from '../utils/templates';
+import Store from '../utils/store';
+
+
+const minute = 60 * 1000;
+const hour = 60 * minute;
 
 export default {
     data: new SlashCommandBuilder()
@@ -11,7 +17,6 @@ export default {
         const modal = createModal();
         await interaction.showModal(modal);
 
-        const minute = 60 * 1000;
         const is_command_sender = (i: Interaction) => i.user.id === interaction.user.id;
 
         let submitted: ModalSubmitInteraction<CacheType>;
@@ -30,10 +35,16 @@ export default {
         }
 
         let announcement: string = submitted.fields.getTextInputValue("AnnouncementInput");
-        const preview_button_row: any = createPreviewButtonRow(announcement)
+        let random_id = Math.random().toString(36).slice(2, 10);
+
+        let announcement_id = "announcement-" + random_id;
+
+        Store.set(announcement_id, announcement, 24 * hour)
+
+        const button_row: any = createSubmitButtonRow(announcement_id)
         await submitted.reply({
-            content: ":white_check_mark: Saved Announcement!",
-            components: [preview_button_row],
+            content: createPreviewAnnouncement(announcement),
+            components: [button_row],
             ephemeral: true
         });
     },
@@ -55,10 +66,10 @@ function createModal() {
     })
 }
 
-function createPreviewButtonRow(announcement: string) {
+function createSubmitButtonRow(announcement_id) {
     const button = new ButtonBuilder()
-        .setCustomId(encodeCustomID('previewAnnouncement', announcement))
-        .setLabel('Preview')
+        .setCustomId(encodeCustomID('confirmAnnouncement', announcement_id))
+        .setLabel('Send')
         .setStyle(ButtonStyle.Primary)
     
     return new ActionRowBuilder({components: [button]})

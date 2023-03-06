@@ -1,23 +1,26 @@
 import { Events } from 'discord.js';
 import type { ButtonInteraction } from 'discord.js';
-import { interactions } from '../interactions';
+import { decodeCustomId, interaction_map } from '../interactions';
 
 export default {
     name: Events.InteractionCreate,
     async execute(interaction: ButtonInteraction) {
         if (!interaction.isButton()) return;
 
-        let [interaction_name, data] = interaction.customId.split("|");
-        if (data !== undefined) {
-            let b64_decoded_data = Buffer.from(data, "base64").toString();
-            data = JSON.parse(b64_decoded_data);
+        let { interaction_name, data } = decodeCustomId(interaction.customId);
+        let interaction_object = interaction_map.get(interaction_name);
+
+        if (!interaction_object) {
+            console.error(`No command matching ${interaction_name} was found.`);
+            return;
         }
 
-        for (let interaction_handler of interactions) {
-            if (interaction_name === interaction_handler.name) {
-                interaction_handler.execute(interaction, data)
-                return;
-            }
+        try {
+            await interaction_object.execute(interaction, data);
+        } catch (error) {
+            console.error(`Error executing ${interaction_name}`);
+            console.error(error);
         }
+        
     },
 };

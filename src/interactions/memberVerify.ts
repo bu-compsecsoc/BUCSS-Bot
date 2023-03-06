@@ -1,5 +1,6 @@
 import { ButtonInteraction } from 'discord.js';
 import { member_role_id } from '../utils/config';
+import { encodeCustomId } from './utils';
 
 export default {
     name: "memberVerify",

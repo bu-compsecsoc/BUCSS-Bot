@@ -1,9 +1,9 @@
-import { Events } from 'discord.js';
+import { Events, CommandInteraction } from 'discord.js';
 import { command_map } from '../commands';
 
 export default{
     name: Events.InteractionCreate,
-    async execute(interaction) {
+    async execute(interaction: CommandInteraction) {
         if (!interaction.isChatInputCommand()) return;
 
         const command = command_map.get(interaction.commandName);
@@ -14,6 +14,8 @@ export default{
         }
 
         try {
+            const user = `${interaction.user.username}#${interaction.user.discriminator}`
+            console.log(`Executing /${interaction.commandName} from ${user}`)
             await command.execute(interaction);
         } catch (error) {
             console.error(`Error executing ${interaction.commandName}`);

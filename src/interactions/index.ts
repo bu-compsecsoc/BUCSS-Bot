@@ -1,6 +1,6 @@
 import type { ButtonInteraction } from 'discord.js';
 export { encodeCustomId as encodeCustomID, decodeCustomId as decodeCustomID } from './utils';
-import previewAnnouncement from './previewAnnouncement';
+import previewAnnouncement from './confirmAnnouncement';
 import memberVerify from './memberVerify';
 import sendAnnouncement from './sendAnnouncement';
 

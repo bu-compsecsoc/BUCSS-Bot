@@ -1,14 +1,6 @@
-import KeyvFile, { makeField } from 'keyv-file'
+import KeyvFile from 'keyv-file'
  
-class Kv extends KeyvFile {
-  constructor() {
-    super({
-      filename: './db.json'
-    })
-  }
-  someField = makeField(this, 'field_key')
-}
-const store = new Kv
+const store = new KeyvFile({ filename: "./db.json" });
 
 type JSONableAny = any;
 

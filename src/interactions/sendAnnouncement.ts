@@ -11,8 +11,6 @@ export default {
     },
     async execute(interaction: ButtonInteraction, announcement_id: string) {
         const channel = interaction.client.channels.cache.get(announcement_channel_id);
-        console.log(channel instanceof TextChannel)
-        console.log(channel)
         
         if (!(channel instanceof TextChannel || channel instanceof NewsChannel)) {
             console.warn("Unable To Retrieve Usable Announcement Channel")

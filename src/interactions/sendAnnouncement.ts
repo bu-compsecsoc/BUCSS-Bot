@@ -1,4 +1,4 @@
-import { ButtonInteraction, TextChannel } from 'discord.js';
+import { ButtonInteraction, TextChannel, NewsChannel } from 'discord.js';
 import { encodeCustomId } from './utils';
 import { announcement_channel_id } from '../utils/config';
 import { createAnnouncement } from '../utils/templates';
@@ -12,7 +12,7 @@ export default {
     async execute(interaction: ButtonInteraction, announcement_id: string) {
         const channel = interaction.client.channels.cache.get(announcement_channel_id);
         
-        if (!(channel instanceof TextChannel)) {
+        if (!(channel instanceof TextChannel || channel instanceof NewsChannel)) {
             console.warn("Unable To Retrieve Usable Announcement Channel")
             await interaction.reply({
                 content: ":x: Could Not Retrieve Announcement Channel!",

@@ -136,6 +136,5 @@ token.json
 yarn.lock
 build
 announcement.json
-package-lock.json
-announcement.json
 db.json
+`

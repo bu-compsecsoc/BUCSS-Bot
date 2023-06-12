@@ -1,26 +1,24 @@
 import type { ButtonInteraction } from 'discord.js';
-import previewAnnouncement from './previewAnnouncement';
+export { encodeCustomId, decodeCustomId } from './utils';
+import confirmAnnouncement from './confirmAnnouncement';
 import memberVerify from './memberVerify';
 import sendAnnouncement from './sendAnnouncement';
+import memberReject from './memberReject';
 
 type Interaction = {
     name: string,
     execute: (interaction: ButtonInteraction, data: any) => (void | Promise<void>),
 }
 
-export const interactions: Interaction[] = [
+const interactions: Interaction[] = [
     sendAnnouncement,
-    previewAnnouncement,
+    confirmAnnouncement,
     memberVerify,
+    memberReject
 ]
 
-type InteractionName = 
-    "sendAnnouncement" |
-    "previewAnnouncement" |
-    "memberVerify"
+export const interaction_map = new Map<string, Interaction>();
 
-export function generateCustomId(name: InteractionName, data: any|null = null) {
-    let json = JSON.stringify(data);
-    let b64_data = Buffer.from(json).toString("base64")
-    return `${name}|${b64_data}`;
+for (let interaction of interactions) {
+    interaction_map.set(interaction.name, interaction)
 }

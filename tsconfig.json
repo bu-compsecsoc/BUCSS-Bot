@@ -5,9 +5,10 @@
         "target": "es2016",
         "module": "commonjs",
         "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": false,
         "strict": false,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": false,
+        "noImplicitAny": true
     },
-    "include": ["./src/**/*"]
+    "include": ["src/**/*"]
 }

@@ -128,13 +128,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-.vscode
-token.json
-.DS_Store
-.env
-yarn.lock
-build
-announcement.json
-db.json
-`
+.gitignore
+bun.lockb

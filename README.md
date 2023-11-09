@@ -6,37 +6,13 @@ This is the bot used to manage the [BUCSS](https://bucss.net) Discord server.
 
 ## Commands
 
-### Announce
+### Poll
 
-`/announce`
-
-Brings up a modal with a box to type in. You can then preview it with the button that pops up. If you are happy with it, you can send it to the server. This will send the message to the specified channel in the Environment Variables.
-
-### Ping
-
-`/ping`
-
-This will send a message to the channel you are in with the message "Pong!".
+Create a poll that will be sent in the **Poll Channel** with the results being sent to the **Admin Channel**.
 
 ### Status
 
-`/status {status}`
-
-This will change the status of the bot to the status you specify.
-Can be:
-
-- `online`
-- `idle`
-- `dnd`
-- `invisible`
-
-### Activity
-
-`/activity {activity}`
-
-This will change the activity of the bot to the activity you specify.
-
----
+See the bots status with uptime stats
 
 ## Setup
 
@@ -50,11 +26,22 @@ TOKEN
 CLIENT_ID
 > The bot's client ID, avaliable at the [Discord Developer Portal](https://discord.com/developers/applications)
 
-ANNOUNCEMENT_CHANNEL
-> The id of the channel that announcements will be sent in
+SUBU_AUTH
+> The auth cookie for the SUBU login
+
+GUILD_ID
+> The Id of the BUCSS Server
+
+POLL_CHANNEL_ID
+> The id of the channel that polls with be sent in
+
+ADMIN_CHANNEL
+> The id of the channel to send admin messages
+
 
 ### Deploying
 
 Run the follow commands
+
 > npm install
 > npm start
